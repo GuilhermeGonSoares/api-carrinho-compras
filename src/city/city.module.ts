@@ -4,16 +4,10 @@ import { CityController } from './city.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { City } from './entities/city.entity';
 import { StateModule } from '../state/state.module';
-import { CacheModule } from '@nestjs/cache-manager';
+import { CacheModule } from '../cache/cache.module';
 
 @Module({
-  imports: [
-    CacheModule.register({
-      ttl: 90000000,
-    }),
-    TypeOrmModule.forFeature([City]),
-    StateModule,
-  ],
+  imports: [TypeOrmModule.forFeature([City]), StateModule, CacheModule],
   controllers: [CityController],
   providers: [CityService],
 })
