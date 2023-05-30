@@ -40,5 +40,5 @@ export class User {
   // Relantionship
 
   @OneToMany(() => Address, (adresses) => adresses.user)
-  adresses: Address[];
+  adresses?: Address[];
 }

@@ -26,8 +26,8 @@ export class City {
 
   // Relationship
   @OneToMany(() => Address, (address) => address.city)
-  addresses: Address[];
+  addresses?: Address[];
 
   @ManyToOne(() => State, (state) => state.cities)
-  state: State;
+  state?: State;
 }

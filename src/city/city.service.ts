@@ -30,9 +30,6 @@ export class CityService {
       where: {
         id,
       },
-      relations: {
-        state: true,
-      },
     });
 
     if (!city) {

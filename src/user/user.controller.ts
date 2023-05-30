@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { ReturnUserDto } from './dtos/returnUser.dto';
@@ -12,6 +12,11 @@ export class UserController {
     return (await this.userService.list()).map(
       (user) => new ReturnUserDto(user),
     );
+  }
+  @Get(':id')
+  async getUserWithRelations(@Param('id') id: string) {
+    const user = await this.userService.findUserWithRelations(+id);
+    return new ReturnUserDto(user);
   }
 
   @Post()

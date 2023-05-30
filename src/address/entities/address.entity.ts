@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -23,6 +24,12 @@ export class Address {
   @Column({ nullable: false })
   cep: string;
 
+  @Column({ name: 'user_id', nullable: false })
+  userId: number;
+
+  @Column({ name: 'city_id', nullable: false })
+  cityId: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
@@ -31,8 +38,10 @@ export class Address {
 
   //Relationship
   @ManyToOne(() => User, (user) => user.adresses)
-  user: User;
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  user?: User;
 
   @ManyToOne(() => City, (city) => city.addresses)
-  city: City;
+  @JoinColumn({ name: 'city_id', referencedColumnName: 'id' })
+  city?: City;
 }
