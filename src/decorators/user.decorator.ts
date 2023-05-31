@@ -1,8 +1,20 @@
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import {
+  createParamDecorator,
+  ExecutionContext,
+  ForbiddenException,
+} from '@nestjs/common';
+import { User } from '../user/entities/user.entity';
 
-export const User = createParamDecorator(
+export const UserDecorator = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
-    console.log(request);
+    const user: User = request.user;
+    if (!user) {
+      throw new ForbiddenException(
+        'You need use AuthGuard to access request.user',
+      );
+    }
+
+    return user;
   },
 );
