@@ -15,6 +15,15 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  validateToken(token: string) {
+    try {
+      const payload: LoginPayload = this.jwtService.verify(token);
+      return payload;
+    } catch (error) {
+      throw new UnauthorizedException(error);
+    }
+  }
+
   async login(loginDto: LoginDto): Promise<ReturnLoginDto> {
     const { email, password } = loginDto;
     const user: User | undefined = await this.userService

@@ -5,9 +5,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Address } from './entities/address.entity';
 import { UserModule } from '../user/user.module';
 import { CityModule } from '../city/city.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Address]), UserModule, CityModule],
+  imports: [
+    TypeOrmModule.forFeature([Address]),
+    UserModule,
+    CityModule,
+    AuthModule,
+  ],
   controllers: [AddressController],
   providers: [AddressService],
 })
