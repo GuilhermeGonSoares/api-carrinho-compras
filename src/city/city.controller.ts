@@ -16,10 +16,10 @@ import { City } from './entities/city.entity';
 export class CityController {
   constructor(private readonly cityService: CityService) {}
 
-  @Post()
-  create(@Body() createCityDto: CreateCityDto) {
-    return this.cityService.create(createCityDto);
-  }
+  // @Post()
+  // create(@Body() createCityDto: CreateCityDto) {
+  //   return this.cityService.create(createCityDto);
+  // }
 
   @Get()
   findAll() {
@@ -38,13 +38,13 @@ export class CityController {
     return this.cityService.getAllCitiesByStateId(+stateId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
-    return this.cityService.update(+id, updateCityDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
+  //   return this.cityService.update(+id, updateCityDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cityService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.cityService.remove(+id);
+  // }
 }

@@ -27,5 +27,5 @@ export class State {
 
   //Relationship
   @OneToMany(() => City, (cities) => cities.state)
-  cities: City[];
+  cities?: City[];
 }

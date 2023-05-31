@@ -15,10 +15,10 @@ import { UpdateStateDto } from './dto/update-state.dto';
 export class StateController {
   constructor(private readonly stateService: StateService) {}
 
-  @Post()
-  create(@Body() createStateDto: CreateStateDto) {
-    return this.stateService.create(createStateDto);
-  }
+  // @Post()
+  // create(@Body() createStateDto: CreateStateDto) {
+  //   return this.stateService.create(createStateDto);
+  // }
 
   @Get()
   findAll() {
@@ -30,13 +30,13 @@ export class StateController {
     return this.stateService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStateDto: UpdateStateDto) {
-    return this.stateService.update(+id, updateStateDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateStateDto: UpdateStateDto) {
+  //   return this.stateService.update(+id, updateStateDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.stateService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.stateService.remove(+id);
+  // }
 }

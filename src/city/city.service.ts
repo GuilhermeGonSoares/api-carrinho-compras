@@ -1,23 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateCityDto } from './dto/create-city.dto';
-import { UpdateCityDto } from './dto/update-city.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { City } from './entities/city.entity';
 import { Repository } from 'typeorm';
-import { StateService } from '../state/state.service';
 import { CacheService } from '../cache/cache.service';
 
 @Injectable()
 export class CityService {
   constructor(
     @InjectRepository(City) private readonly cityRepository: Repository<City>,
-    private readonly stateService: StateService,
     private readonly cacheService: CacheService,
   ) {}
-
-  create(createCityDto: CreateCityDto) {
-    return 'This action adds a new city';
-  }
 
   async findAll() {
     return await this.cacheService.getCache<City[]>('allCities', () =>
@@ -51,13 +43,5 @@ export class CityService {
           },
         }),
     );
-  }
-
-  update(id: number, updateCityDto: UpdateCityDto) {
-    return `This action updates a #${id} city`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} city`;
   }
 }
