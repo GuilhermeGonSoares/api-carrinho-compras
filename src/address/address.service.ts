@@ -18,4 +18,16 @@ export class AddressService {
     address.userId = userId;
     return await this.repository.save(address);
   }
+
+  async findAllAdressesByUserId(userId: number) {
+    const address = await this.repository.find({
+      where: {
+        userId,
+      },
+      relations: {
+        city: true,
+      },
+    });
+    return address;
+  }
 }

@@ -24,6 +24,7 @@ describe('AddressService', () => {
           useValue: {
             save: jest.fn().mockReturnValue(AddressMock),
             create: jest.fn().mockReturnValue(CreateAddressMock),
+            find: jest.fn().mockReturnValue([AddressMock]),
           },
         },
         {
@@ -58,5 +59,10 @@ describe('AddressService', () => {
     expect(
       service.create(CreateAddressMock, UserMock.id),
     ).rejects.toThrowError();
+  });
+
+  it('should return all addresses to user', async () => {
+    const adresses = await service.findAllAdressesByUserId(UserMock.id);
+    expect(adresses).toEqual([AddressMock]);
   });
 });
