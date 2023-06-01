@@ -2,12 +2,12 @@ import { ReturnAddresDto } from '../../address/dto/return-addres.dto';
 import { User } from '../entities/user.entity';
 
 export class ReturnUserDto {
-  private id: number;
-  private name: string;
-  private email: string;
-  private phone: string;
-  private cpf: string;
-  private addresses?: ReturnAddresDto[];
+  public id: number;
+  public name: string;
+  public email: string;
+  public phone: string;
+  public cpf: string;
+  public addresses?: ReturnAddresDto[];
 
   constructor(userEntity: User) {
     this.id = userEntity.id;

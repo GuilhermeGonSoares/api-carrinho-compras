@@ -7,7 +7,7 @@ export const UserMock: User = {
   email: 'mock@example.com',
   phone: '12112125',
   cpf: '12314125125',
-  password: '12345',
+  password: '$2b$10$I/5pAb.iF0JOvtE8uqMtjOQYAFLeTUAIOPUZpBqcwD6aPaNVeyzLi',
   typeUser: Role.User,
   createdAt: new Date(),
   updatedAt: new Date(),
