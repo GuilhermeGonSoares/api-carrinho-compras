@@ -25,5 +25,5 @@ export class Category {
   //Relationship
 
   @OneToMany(() => Product, (product) => product.category)
-  products: Product[];
+  products?: Product[];
 }
