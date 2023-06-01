@@ -2,12 +2,14 @@ import {
   Injectable,
   ConflictException,
   NotFoundException,
+  ForbiddenException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dtos/createUser.dto';
 import * as bcrypt from 'bcrypt';
+import { UpdatedPasswordDto } from './dtos/updated-password.dtos';
 
 @Injectable()
 export class UserService {
@@ -73,5 +75,21 @@ export class UserService {
 
     const newUser = this.usersRepository.create(user);
     return await this.usersRepository.save(newUser);
+  }
+
+  async updatedPassword(
+    { oldPassword, newPassword }: UpdatedPasswordDto,
+    id: number,
+  ) {
+    const user = await this.findUserById(id);
+
+    const verifyOldPassowrd = await bcrypt.compare(oldPassword, user.password);
+
+    if (!verifyOldPassowrd) {
+      throw new ForbiddenException('Old password invalid!');
+    }
+
+    const passwordHash = await bcrypt.hash(newPassword, 10);
+    return await this.usersRepository.save({ ...user, password: passwordHash });
   }
 }
