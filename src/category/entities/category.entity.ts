@@ -13,7 +13,7 @@ export class Category {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   name: string;
 
   @CreateDateColumn({ name: 'created_at' })

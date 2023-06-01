@@ -1,7 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { ReturnCategoryDto } from './dtos/return-category.dto';
 import { CreateCategoryDto } from './dtos/create-category.dto';
+import { AuthGuard } from '../guards/auth.guard';
+import { RoleGuard } from '../guards/role.guard';
+import { Roles } from '../decorators/role.decorator';
+import { Role } from '../enums/role.enum';
 
 @Controller('category')
 export class CategoryController {
@@ -14,6 +18,8 @@ export class CategoryController {
     );
   }
 
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(Role.Admin)
   @Post()
   async create(
     @Body() category: CreateCategoryDto,

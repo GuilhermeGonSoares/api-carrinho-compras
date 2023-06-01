@@ -19,6 +19,7 @@ describe('CategoryService', () => {
           useValue: {
             find: jest.fn().mockReturnValue([CategoryMock]),
             save: jest.fn().mockReturnValue(CategoryMock),
+            findOne: jest.fn().mockReturnValue(CategoryMock),
           },
         },
       ],
@@ -40,8 +41,25 @@ describe('CategoryService', () => {
   });
 
   it('should be crate category', async () => {
+    jest.spyOn(repository, 'findOne').mockReturnValue(undefined);
     const category = await categoryService.create(CreateCategoryMock);
 
     expect(category).toEqual(CategoryMock);
+  });
+
+  it('should return category in findCategoryByName', async () => {
+    const category = await categoryService.findCategoryByName(
+      CreateCategoryMock.name,
+    );
+
+    expect(category).toEqual(CategoryMock);
+  });
+
+  it('should return error if not exist category in findCategoryByName', async () => {
+    jest.spyOn(repository, 'findOne').mockReturnValue(undefined);
+
+    expect(
+      categoryService.findCategoryByName(CategoryMock.name),
+    ).rejects.toThrowError();
   });
 });
