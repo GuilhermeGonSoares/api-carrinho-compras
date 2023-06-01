@@ -35,5 +35,5 @@ export class Product {
   //Relationship
   @ManyToOne(() => Category, (category) => category.products)
   @JoinColumn({ name: 'category_id', referencedColumnName: 'id' })
-  category: Category;
+  category?: Category;
 }

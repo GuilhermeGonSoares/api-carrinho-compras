@@ -41,4 +41,14 @@ export class CategoryService {
 
     return category;
   }
+
+  async findCategoryById(id: number) {
+    const category = await this.repository.findOne({ where: { id } });
+
+    if (!category) {
+      throw new NotFoundException(`Category id ${id} not found`);
+    }
+
+    return category;
+  }
 }
