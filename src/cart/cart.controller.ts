@@ -1,4 +1,12 @@
-import { Controller, UseGuards, Post, Body, Get } from '@nestjs/common';
+import {
+  Controller,
+  UseGuards,
+  Post,
+  Body,
+  Get,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { AuthGuard } from '../guards/auth.guard';
 import { UserModule } from '../user/user.module';
 import { Roles } from '../decorators/role.decorator';
@@ -30,5 +38,18 @@ export class CartController {
     return new ReturnCartDto(
       await this.cartService.findCartByUserId(user.id, true),
     );
+  }
+
+  @Delete()
+  async clearCart(@UserDecorator() user: User) {
+    return this.cartService.clearCart(user.id);
+  }
+
+  @Delete('product/:productId')
+  async deleteProductInCart(
+    @UserDecorator() user: User,
+    @Param('productId') productId: string,
+  ) {
+    return await this.cartService.deleteProductCart(+productId, user.id);
   }
 }

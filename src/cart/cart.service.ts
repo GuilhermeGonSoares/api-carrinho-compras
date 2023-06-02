@@ -50,6 +50,16 @@ export class CartService {
 
     await this.carProductService.insertProductInCart(insertCart, cart.id);
 
-    return this.findCartByUserId(userId, true);
+    return cart;
+  }
+
+  async clearCart(userId: number) {
+    const cart = await this.findCartByUserId(userId);
+    await this.repository.save({ ...cart, active: false });
+  }
+
+  async deleteProductCart(productId: number, userId: number) {
+    const cart = await this.findCartByUserId(userId);
+    return await this.carProductService.deleteProduct(productId, cart.id);
   }
 }

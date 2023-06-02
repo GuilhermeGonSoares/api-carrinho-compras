@@ -51,4 +51,12 @@ export class CartProductService {
       amount: cartProduct.amount + insertCart.amount,
     });
   }
+
+  async deleteProduct(productId: number, cartId: number): Promise<CartProduct> {
+    await this.productService.findProductById(productId);
+
+    const cartProduct = await this.verifyCartProductExist(productId, cartId);
+
+    return await this.repository.remove(cartProduct);
+  }
 }
