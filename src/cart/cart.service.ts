@@ -12,12 +12,21 @@ export class CartService {
     private readonly carProductService: CartProductService,
   ) {}
 
-  async verifyActiveCart(userId: number): Promise<Cart> {
+  async findCartByUserId(userId: number, isRelations?: boolean): Promise<Cart> {
+    const relations = isRelations
+      ? {
+          cartProducts: {
+            product: true,
+          },
+        }
+      : undefined;
+
     const cart = await this.repository.findOne({
       where: {
         userId,
         active: true,
       },
+      relations,
     });
 
     if (!cart) {
@@ -35,12 +44,12 @@ export class CartService {
   }
 
   async insertProductcart(insertCart: InsertCartDto, userId: number) {
-    const cart = await this.verifyActiveCart(userId).catch(() =>
+    const cart = await this.findCartByUserId(userId).catch(() =>
       this.createCart(userId),
     );
 
     await this.carProductService.insertProductInCart(insertCart, cart.id);
 
-    return cart;
+    return this.findCartByUserId(userId, true);
   }
 }

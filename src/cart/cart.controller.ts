@@ -1,4 +1,4 @@
-import { Controller, UseGuards, Post, Body } from '@nestjs/common';
+import { Controller, UseGuards, Post, Body, Get } from '@nestjs/common';
 import { AuthGuard } from '../guards/auth.guard';
 import { UserModule } from '../user/user.module';
 import { Roles } from '../decorators/role.decorator';
@@ -7,6 +7,7 @@ import { CartService } from './cart.service';
 import { InsertCartDto } from './dtos/insert-cart-dto';
 import { UserDecorator } from '../decorators/user.decorator';
 import { User } from '../user/entities/user.entity';
+import { ReturnCartDto } from './dtos/return-cart.dto';
 
 @UseGuards(AuthGuard, UserModule)
 @Roles(Role.User)
@@ -19,6 +20,15 @@ export class CartController {
     @Body() insertCart: InsertCartDto,
     @UserDecorator() user: User,
   ) {
-    return this.cartService.insertProductcart(insertCart, user.id);
+    return new ReturnCartDto(
+      await this.cartService.insertProductcart(insertCart, user.id),
+    );
+  }
+
+  @Get()
+  async findOne(@UserDecorator() user: User): Promise<ReturnCartDto> {
+    return new ReturnCartDto(
+      await this.cartService.findCartByUserId(user.id, true),
+    );
   }
 }
