@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
 import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
+import { CartProductModule } from './cart-product/cart-product.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { CartModule } from './cart/cart.module';
     CategoryModule,
     ProductsModule,
     CartModule,
+    CartProductModule,
   ],
   controllers: [],
   providers: [],
