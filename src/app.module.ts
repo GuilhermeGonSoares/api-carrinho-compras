@@ -12,6 +12,10 @@ import { CategoryModule } from './category/category.module';
 import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
 import { CartProductModule } from './cart-product/cart-product.module';
+import { PaymentStatusModule } from './payment-status/payment-status.module';
+import { PaymentModule } from './payment/payment.module';
+import { OrderModule } from './order/order.module';
+import { OrderProductModule } from './order-product/order-product.module';
 
 @Module({
   imports: [
@@ -29,6 +33,10 @@ import { CartProductModule } from './cart-product/cart-product.module';
     ProductsModule,
     CartModule,
     CartProductModule,
+    PaymentStatusModule,
+    PaymentModule,
+    OrderModule,
+    OrderProductModule,
   ],
   controllers: [],
   providers: [],
