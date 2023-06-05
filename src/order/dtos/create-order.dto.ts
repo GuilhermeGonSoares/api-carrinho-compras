@@ -1,6 +1,9 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsInt, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateOrderDto {
+  @IsInt()
+  addressId: number;
+
   @IsOptional()
   @IsNumber()
   amountPayments?: number;

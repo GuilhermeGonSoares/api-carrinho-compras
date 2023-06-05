@@ -14,7 +14,6 @@ export class PaymentService {
   ) {}
 
   async createPayment(createOrderDto: CreateOrderDto) {
-    console.log(createOrderDto);
     if (createOrderDto.amountPayments) {
       const paymentCreditCart = new PaymentCreditCart(
         Status.Done,

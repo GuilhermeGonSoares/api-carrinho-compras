@@ -6,6 +6,8 @@ import { Order } from './entities/order.entity';
 import { AuthModule } from '../auth/auth.module';
 import { UserModule } from '../user/user.module';
 import { PaymentModule } from '../payment/payment.module';
+import { CartModule } from '../cart/cart.module';
+import { OrderProductModule } from '../order-product/order-product.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { PaymentModule } from '../payment/payment.module';
     AuthModule,
     UserModule,
     PaymentModule,
+    CartModule,
+    OrderProductModule,
   ],
   controllers: [OrderController],
   providers: [OrderService],
